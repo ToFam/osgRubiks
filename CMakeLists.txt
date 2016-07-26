@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.6.3)
+cmake_minimum_required(VERSION 2.8.11)
 project(osgRubiks)
 
 find_package(OpenSceneGraph REQUIRED osg osgViewer osgGA osgQt)
