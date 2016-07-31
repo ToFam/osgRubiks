@@ -12,6 +12,10 @@ set (SRC main.cpp
     mainwindow.ui
     viewerwidget.h
     viewerwidget.cpp
+    cube.h
+    cube.cpp
+    rubikscube.h
+    rubikscube.cpp
     )
     
 set(CMAKE_AUTOMOC ON)

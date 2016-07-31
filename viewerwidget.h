@@ -3,11 +3,10 @@
 
 #include <QWidget>
 #include <QTimer>
-#include <osgViewer/View>
-#include <osgViewer/CompositeViewer>
+#include <osgViewer/Viewer>
 #include <osg/Group>
 
-class ViewerWidget : public QWidget, public osgViewer::CompositeViewer
+class ViewerWidget : public QWidget, public osgViewer::Viewer
 {
     Q_OBJECT
 
@@ -21,7 +20,6 @@ private:
 
     QTimer m_timer;
     osg::Group* m_scene;
-    osgViewer::View* m_view;
 };
 
 #endif // VIEWERWIDGET_H
