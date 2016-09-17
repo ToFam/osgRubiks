@@ -70,11 +70,7 @@ Cube::Cube()
     m_geometry->setColorArray(colors);
     m_geometry->setColorBinding(osg::Geometry::BIND_PER_PRIMITIVE_SET);
 
-    m_geode = new osg::Geode();
-    m_geode->addChild(m_geometry);
-
-    m_transform = new osg::PositionAttitudeTransform();
-    m_transform->addChild(m_geode);
+    addChild(m_geometry);
 }
 
 void Cube::setColor(CubeSide side, osg::Vec4 rgba)
@@ -87,19 +83,4 @@ osg::Vec4 Cube::getColor(CubeSide side) const
 {
     const osg::Vec4Array* colors = static_cast<const osg::Vec4Array*>(m_geometry->getColorArray());
     return (*colors)[side];
-}
-
-osg::Vec3 Cube::getPosition() const
-{
-    return m_transform->getPosition();
-}
-
-void Cube::setPosition(osg::Vec3 pos)
-{
-    m_transform->setPosition(pos);
-}
-
-osg::Group* Cube::getNode()
-{
-    return m_transform;
 }

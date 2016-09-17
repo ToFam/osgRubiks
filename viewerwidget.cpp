@@ -7,6 +7,7 @@
 #include <osgViewer/ViewerEventHandlers>
 
 #include "rubikscube.h"
+#include "rubikshandler.h"
 
 ViewerWidget::ViewerWidget(QWidget* parent)
     :QWidget(parent)
@@ -41,6 +42,7 @@ ViewerWidget::ViewerWidget(QWidget* parent)
 
     setSceneData( m_scene );
     addEventHandler( new osgViewer::StatsHandler );
+    addEventHandler( new RubiksHandler(static_cast<RubiksCube*>(m_scene)) );
     setCameraManipulator( new osgGA::MultiTouchTrackballManipulator );
     window->setTouchEventsEnabled( true );
 
@@ -60,10 +62,6 @@ void ViewerWidget::paintEvent(QPaintEvent *)
 
 void ViewerWidget::createScene()
 {
-    m_scene = new osg::Group();
-
-    RubiksCube* cube = new RubiksCube();
-    m_scene->addChild(cube->getGroup());
-
+    m_scene = new RubiksCube();
     m_scene->getOrCreateStateSet()->setMode(GL_LIGHTING, osg::StateAttribute::OFF);
 }

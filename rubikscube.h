@@ -1,17 +1,21 @@
 #ifndef RUBIKSCUBE_H
 #define RUBIKSCUBE_H
 
+#include <osg/Group>
+
 #include "cube.h"
 
-class RubiksCube
+class RubiksCube : public osg::Group
 {
 public:
     RubiksCube();
 
-    osg::Group* getGroup();
+    bool rotate(Cube* cube, bool clockwise);
+
+    void expand(double amount);
+
 private:
     Cube** m_cubes;
-    osg::Group* m_group;
 };
 
 #endif // RUBIKSCUBE_H

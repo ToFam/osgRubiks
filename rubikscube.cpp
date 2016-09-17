@@ -1,20 +1,22 @@
 #include "rubikscube.h"
 
+#include <osg/PositionAttitudeTransform>
+
 RubiksCube::RubiksCube()
 {
-    m_group = new osg::Group();
-
     m_cubes = new Cube*[27];
     for (int i = 0; i < 27; i++)
     {
         m_cubes[i] = new Cube();
-        m_group->addChild(m_cubes[i]->getNode());
+        osg::PositionAttitudeTransform* t = new osg::PositionAttitudeTransform;
 
         float x = 1.1 * ((i % 3) - 1);
         float y = 1.1 * (((int)(i / 3) % 3) - 1);
         float z = 1.1 * ((int)(i / 9) - 1);
 
-        m_cubes[i]->setPosition(osg::Vec3(x, y, z));
+        t->setPosition(osg::Vec3(x, y, z));
+        t->addChild(m_cubes[i]);
+        addChild(t);
     }
 
     for (int i = 0; i < 9; i++)
@@ -45,7 +47,24 @@ RubiksCube::RubiksCube()
     }
 }
 
-osg::Group* RubiksCube::getGroup()
+void RubiksCube::expand(double amount)
 {
-    return m_group;
+    for (int i = 0; i < 27; i++)
+    {
+        auto t = static_cast<osg::PositionAttitudeTransform*>(m_cubes[i]->getParent(0));
+        t->setPosition(t->getPosition() * amount);
+    }
+}
+
+bool RubiksCube::rotate(Cube *cube, bool clockwise)
+{
+    for (int i = 0; i < 27; i++)
+    {
+        if (cube == m_cubes[i])
+        {
+            if (i == 4)
+            {
+            }
+        }
+    }
 }

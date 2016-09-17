@@ -16,6 +16,8 @@ set (SRC main.cpp
     cube.cpp
     rubikscube.h
     rubikscube.cpp
+    rubikshandler.h
+    rubikshandler.cpp
     )
     
 set(CMAKE_AUTOMOC ON)
