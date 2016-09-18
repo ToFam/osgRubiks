@@ -6,6 +6,8 @@
 #include <osgViewer/Viewer>
 #include <osg/Group>
 
+#include "rubikscube.h"
+
 class ViewerWidget : public QWidget, public osgViewer::Viewer
 {
     Q_OBJECT
@@ -20,6 +22,7 @@ private:
 
     QTimer m_timer;
     osg::Group* m_scene;
+    RubiksCube* m_cube;
 };
 
 #endif // VIEWERWIDGET_H

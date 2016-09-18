@@ -13,6 +13,11 @@ Cube::Cube()
     cubeVertices->push_back( osg::Vec3( 1, 1, 1) ); // 6 upper back right
     cubeVertices->push_back( osg::Vec3( 0, 1, 1) ); // 7 upper back left
 
+    for (int i = 0; i < 8; i++)
+    {
+        cubeVertices->at(i) -= osg::Vec3(0.5,0.5,0.5);
+    }
+
     m_geometry->setVertexArray(cubeVertices);
 
     osg::DrawElementsUInt* cubeBase =

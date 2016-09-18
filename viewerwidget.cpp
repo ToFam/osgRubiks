@@ -42,7 +42,7 @@ ViewerWidget::ViewerWidget(QWidget* parent)
 
     setSceneData( m_scene );
     addEventHandler( new osgViewer::StatsHandler );
-    addEventHandler( new RubiksHandler(static_cast<RubiksCube*>(m_scene)) );
+    addEventHandler( new RubiksHandler(m_cube) );
     setCameraManipulator( new osgGA::MultiTouchTrackballManipulator );
     window->setTouchEventsEnabled( true );
 
@@ -58,10 +58,16 @@ ViewerWidget::ViewerWidget(QWidget* parent)
 void ViewerWidget::paintEvent(QPaintEvent *)
 {
     frame();
+
+    m_cube->frame(getFrameStamp()->getReferenceTime());
 }
 
 void ViewerWidget::createScene()
 {
-    m_scene = new RubiksCube();
+    m_scene = new osg::Group();
+
+    m_cube = new RubiksCube();
+    m_scene->addChild(m_cube);
+
     m_scene->getOrCreateStateSet()->setMode(GL_LIGHTING, osg::StateAttribute::OFF);
 }

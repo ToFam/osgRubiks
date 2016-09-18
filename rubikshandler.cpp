@@ -56,13 +56,16 @@ bool RubiksHandler::handle(const osgGA::GUIEventAdapter &ea, osgGA::GUIActionAda
                     Cube* c = dynamic_cast<Cube*>(*it);
                     if (c)
                     {
-                        m_cube->rotate(c, true);
-                        hitr = intersections.end();
-                        break;
+                        if (ea.getModKeyMask() & osgGA::GUIEventAdapter::MODKEY_CTRL)
+                            m_cube->rotate(c, false);
+                        else
+                            m_cube->rotate(c, true);
+                        return false;
                     }
                 }while(it != hitr->nodePath.begin());
             }
         }
+        break;
     }
     }
 
