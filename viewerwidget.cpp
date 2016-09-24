@@ -76,3 +76,13 @@ void ViewerWidget::createScene()
 
     m_scene->getOrCreateStateSet()->setMode(GL_LIGHTING, osg::StateAttribute::OFF);
 }
+
+void ViewerWidget::scramble()
+{
+    m_cube->scramble();
+}
+
+void ViewerWidget::reset()
+{
+    m_cube->reset();
+}

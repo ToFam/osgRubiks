@@ -53,6 +53,7 @@ RubiksCube::RubiksCube()
 
     m_rotating = false;
     m_rotatingCubes = new Cube*[9];
+    m_rotatingSpeed = STANDARD_ROT_SPEED;
 }
 
 void RubiksCube::frame(double elapsedTime)
@@ -60,7 +61,9 @@ void RubiksCube::frame(double elapsedTime)
     double frameTime = elapsedTime - m_time;
     m_time = elapsedTime;
     if (m_rotating)
-        rotate(frameTime);
+        rotate(m_rotatingSpeed * frameTime);
+    else if (m_scrambleCountdown > 0)
+        scramble();
 }
 
 void RubiksCube::expand(double amount)
@@ -72,32 +75,32 @@ void RubiksCube::expand(double amount)
     }
 }
 
-void RubiksCube::rotate(Side side, bool clockwise)
+void RubiksCube::rotate(Side side, bool clockwise, bool instant)
 {
     switch(side)
     {
     case RED:
-        rotate(m_cubes[4], clockwise);
+        rotate(m_cubes[4], clockwise, instant);
         return;
     case ORANGE:
-        rotate(m_cubes[22], clockwise);
+        rotate(m_cubes[22], clockwise, instant);
         return;
     case BLUE:
-        rotate(m_cubes[10], clockwise);
+        rotate(m_cubes[10], clockwise, instant);
         return;
     case WHITE:
-        rotate(m_cubes[12], clockwise);
+        rotate(m_cubes[12], clockwise, instant);
         return;
     case YELLOW:
-        rotate(m_cubes[14], clockwise);
+        rotate(m_cubes[14], clockwise, instant);
         return;
     case GREEN:
-        rotate(m_cubes[16], clockwise);
+        rotate(m_cubes[16], clockwise, instant);
         return;
     }
 }
 
-void RubiksCube::rotate(Cube *cube, bool clockwise)
+void RubiksCube::rotate(Cube *cube, bool clockwise, bool instant)
 {
     if (m_rotating)
         return;
@@ -235,6 +238,8 @@ void RubiksCube::rotate(Cube *cube, bool clockwise)
     m_rotating = true;
     m_angle = 0;
 
+    if (instant)
+        rotate(1);
 }
 
 void RubiksCube::rotate(double angle)
@@ -258,4 +263,24 @@ void RubiksCube::rotate(double angle)
 
         mt->setMatrix(mt->getMatrix() * m);
     }
+}
+
+void RubiksCube::scramble()
+{
+    if (m_scrambleCountdown == 0)
+    {
+        m_scrambleCountdown = 50;
+        m_rotatingSpeed = 10;
+    }
+
+    rotate(static_cast<Side>(rand() % 6), false);
+
+    m_scrambleCountdown--;
+    if (m_scrambleCountdown == 0)
+        m_rotatingSpeed = STANDARD_ROT_SPEED;
+}
+
+void RubiksCube::reset()
+{
+
 }

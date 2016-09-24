@@ -19,6 +19,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->turnOrangeInv, &QPushButton::pressed, this, [this](){ ui->widget->rotate(RubiksCube::ORANGE,   false); });
     connect(ui->turnWhite, &QPushButton::pressed, this,     [this](){ ui->widget->rotate(RubiksCube::WHITE,    true); });
     connect(ui->turnWhiteInv, &QPushButton::pressed, this,  [this](){ ui->widget->rotate(RubiksCube::WHITE,    false); });
+
+    connect(ui->reset, SIGNAL(pressed()), ui->widget, SLOT(reset()));
+    connect(ui->scramble, SIGNAL(pressed()), ui->widget, SLOT(scramble()));
 }
 
 MainWindow::~MainWindow()

@@ -19,6 +19,8 @@ public:
 
 public slots:
     void rotate(RubiksCube::Side side, bool clockwise);
+    void scramble();
+    void reset();
 
 private:
     void createScene();
