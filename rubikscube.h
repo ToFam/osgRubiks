@@ -10,6 +10,17 @@ class RubiksCube : public osg::Group
 public:
     RubiksCube();
 
+    enum Side
+    {
+        RED,
+        GREEN,
+        BLUE,
+        WHITE,
+        YELLOW,
+        ORANGE
+    };
+
+    void rotate(Side side, bool clockwise);
     void rotate(Cube* cube, bool clockwise);
 
     void expand(double amount);

@@ -72,6 +72,31 @@ void RubiksCube::expand(double amount)
     }
 }
 
+void RubiksCube::rotate(Side side, bool clockwise)
+{
+    switch(side)
+    {
+    case RED:
+        rotate(m_cubes[4], clockwise);
+        return;
+    case ORANGE:
+        rotate(m_cubes[22], clockwise);
+        return;
+    case BLUE:
+        rotate(m_cubes[10], clockwise);
+        return;
+    case WHITE:
+        rotate(m_cubes[12], clockwise);
+        return;
+    case YELLOW:
+        rotate(m_cubes[14], clockwise);
+        return;
+    case GREEN:
+        rotate(m_cubes[16], clockwise);
+        return;
+    }
+}
+
 void RubiksCube::rotate(Cube *cube, bool clockwise)
 {
     if (m_rotating)

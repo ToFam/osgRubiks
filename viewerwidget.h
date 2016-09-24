@@ -17,6 +17,9 @@ public:
 
     void paintEvent(QPaintEvent* /* event*/) Q_DECL_OVERRIDE;
 
+public slots:
+    void rotate(RubiksCube::Side side, bool clockwise);
+
 private:
     void createScene();
 

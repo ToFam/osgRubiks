@@ -55,6 +55,11 @@ ViewerWidget::ViewerWidget(QWidget* parent)
     m_timer.start(10);
 }
 
+void ViewerWidget::rotate(RubiksCube::Side side, bool clockwise)
+{
+    m_cube->rotate(side, clockwise);
+}
+
 void ViewerWidget::paintEvent(QPaintEvent *)
 {
     frame();
